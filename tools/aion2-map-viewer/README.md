@@ -12,7 +12,11 @@ Exact source packages and crop rectangles are recorded in `assets/ui/sources.jso
 
 ## Open the prepared website
 
-Requires Node.js 22 or newer. From the repository root:
+Requires Node.js 22 or newer. On Windows, if it is missing, the launcher offers
+to download a portable Node.js LTS from nodejs.org into
+`tools/aion2-map-viewer/.node/` (SHA-256 verified, no administrator rights or
+system install). Pass `-DownloadNode` to accept without the prompt. From the
+repository root:
 
 Double-click `Build-Deploy-Website.bat` to test, rebuild `dist`, restart only
 the local map server and open the website. Errors stay visible in the batch
@@ -47,8 +51,8 @@ and served directly. The Node build and runtime are cross-platform; the client
 asset extraction scripts are Windows-only.
 Alternatively, copy the complete generated `dist/` folder and run
 `node tools/aion2-map-viewer/server.mjs` to serve that release without rebuilding.
-GitHub Actions runs the website tests on Linux with Node 22 and 24, including
-an isolated deployment fixture for first launch, restart, stale/foreign PIDs,
+On Linux, `node --test tools/aion2-map-viewer/tests/*.test.mjs` also runs an
+isolated deployment fixture for first launch, restart, stale/foreign PIDs,
 port conflicts, failed tests and recovery after a packaging failure. The fixture
 does not require or publish the ignored native map tiles.
 

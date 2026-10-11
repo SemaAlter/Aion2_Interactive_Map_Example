@@ -9,6 +9,7 @@ nodes, monsters, NPCs, Empyrean Traces and zones, drawn at their exact client co
 
 ```bat
 Build-Deploy-Website.bat              rem Windows: test, build, serve and open the map
+                                      rem (offers to download Node.js if it is missing)
 ```
 
 ```bash

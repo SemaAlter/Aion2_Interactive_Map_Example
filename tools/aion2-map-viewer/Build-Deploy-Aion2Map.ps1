@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [ValidateRange(1, 65535)][int]$Port = 4179,
-    [switch]$NoBrowser
+    [switch]$NoBrowser,
+    [switch]$DownloadNode
 )
 $ErrorActionPreference = 'Stop'
 $toolRoot = $PSScriptRoot
@@ -23,12 +24,55 @@ function Start-MapServer {
     Start-Process -FilePath $node.Source -ArgumentList ('"' + $serverPath + '"') -WorkingDirectory $toolRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput $outputLog -RedirectStandardError $errorLog
 }
 
+function Test-NodeVersion($command) {
+    if (-not $command) { return $false }
+    $version = & $command.Source --version 2>$null
+    return $LASTEXITCODE -eq 0 -and [int]("$version".TrimStart('v').Split('.')[0]) -ge 22
+}
+
+# Portable Node.js in .node\, so no administrator rights or system install are needed.
+function Install-PortableNode($target) {
+    $ProgressPreference = 'SilentlyContinue'
+    $arch = if ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') { 'arm64' } else { 'x64' }
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    $release = (Invoke-RestMethod -UseBasicParsing 'https://nodejs.org/dist/index.json') |
+        Where-Object { $_.lts -and $_.files -contains "win-$arch-zip" } | Select-Object -First 1
+    if (-not $release) { throw 'Could not find a Node.js LTS release to download.' }
+    $name = "node-$($release.version)-win-$arch"
+    $base = "https://nodejs.org/dist/$($release.version)"
+    $temp = Join-Path ([IO.Path]::GetTempPath()) ([IO.Path]::GetRandomFileName())
+    New-Item -ItemType Directory -Path $temp | Out-Null
+    try {
+        Write-Host "Downloading Node.js $($release.version) ($arch)..." -ForegroundColor Cyan
+        $zip = Join-Path $temp "$name.zip"
+        Invoke-WebRequest -UseBasicParsing -Uri "$base/$name.zip" -OutFile $zip
+        $sums = (Invoke-WebRequest -UseBasicParsing -Uri "$base/SHASUMS256.txt").Content
+        $expected = ($sums -split '\r?\n' | Where-Object { $_ -match "\s$([regex]::Escape("$name.zip"))$" }) -replace '\s.*$'
+        if (-not $expected -or (Get-FileHash -Algorithm SHA256 $zip).Hash -ne $expected.Trim().ToUpperInvariant()) {
+            throw 'Downloaded Node.js failed its SHA-256 check. Nothing was installed.'
+        }
+        Expand-Archive -LiteralPath $zip -DestinationPath $temp
+        if (Test-Path -LiteralPath $target) { Remove-Item -LiteralPath $target -Recurse -Force }
+        Move-Item -LiteralPath (Join-Path $temp $name) -Destination $target
+    } finally {
+        Remove-Item -LiteralPath $temp -Recurse -Force -ErrorAction SilentlyContinue
+    }
+}
+
 Push-Location $toolRoot
 try {
-    $node = Get-Command node.exe -ErrorAction Stop
-    $nodeVersion = & $node.Source --version
-    if ($LASTEXITCODE -ne 0) { throw 'Install Node.js 22 or newer, then run this batch file again.' }
-    if ([int]($nodeVersion.TrimStart('v').Split('.')[0]) -lt 22) { throw 'Node.js 22 or newer is required.' }
+    $portableNode = Join-Path $toolRoot '.node'
+    $node = Get-Command (Join-Path $portableNode 'node.exe') -ErrorAction SilentlyContinue
+    if (-not (Test-NodeVersion $node)) { $node = Get-Command node.exe -ErrorAction SilentlyContinue }
+    if (-not (Test-NodeVersion $node)) {
+        if (-not $DownloadNode) {
+            $answer = Read-Host 'Node.js 22 or newer was not found. Download a portable copy into this folder (about 35 MB)? [Y/n]'
+            if ($answer -and $answer -notmatch '^(y|yes)$') { throw 'Node.js 22 or newer is required. Install it from https://nodejs.org/, then run this batch file again.' }
+        }
+        Install-PortableNode $portableNode
+        $node = Get-Command (Join-Path $portableNode 'node.exe') -ErrorAction Stop
+        if (-not (Test-NodeVersion $node)) { throw 'The downloaded Node.js did not start.' }
+    }
     $env:HOST = '127.0.0.1'
     $env:PORT = [string]$Port
 
