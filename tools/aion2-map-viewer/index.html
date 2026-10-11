@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#141b20">
+  <meta name="description" content="Explore AION 2's real game maps in native detail. Find gathering nodes, monster placements, NPCs and travel points by region and zone.">
+  <title>AION 2 Interactive map</title>
+  <link rel="icon" href="./assets/ui/map.png" type="image/png">
+  <link rel="preload" href="./assets/ui/Aion2Yoon_EN_B.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#map">Skip to map</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="AION 2 Interactive map home"><img src="./assets/ui/map.png" alt="" width="36" height="36"><span>AION 2 <span class="brand-caption">Interactive map</span></span></a>
+    <nav aria-label="Main navigation"><span class="nav-active">World map</span><button id="bookmarks" aria-pressed="false"><img src="./assets/ui/save.png" alt="">Saved locations <span id="saved-count">0</span></button><button id="about-open"><img src="./assets/ui/info.png" alt="">Map information</button></nav>
+    <button id="menu-toggle" class="mobile-menu" aria-expanded="false" aria-controls="sidebar"><img src="./assets/ui/filters.png" alt="">Filters</button>
+  </header>
+  <main class="workspace">
+    <aside id="sidebar" class="sidebar" aria-label="Map filters">
+      <div class="sidebar-content">
+      <div class="sidebar-intro"><img src="./assets/ui/filters.png" alt=""><h1>Map filters</h1></div>
+      <div class="faction-tabs" role="group" aria-label="Faction"><button data-faction="Elyos" aria-pressed="true"><img src="./assets/ui/elyos.png" alt=""><span>Elyos</span></button><button data-faction="Asmodians" aria-pressed="false"><img src="./assets/ui/asmodians.png" alt=""><span>Asmodians</span></button><button data-faction="Abyss" aria-pressed="false"><img src="./assets/ui/map.png" alt=""><span>Abyss</span></button></div>
+      <label class="field-label" for="world-select">Region</label><select id="world-select" aria-label="Select region" disabled><option>Loading maps...</option></select>
+      <div class="search-field"><img src="./assets/ui/search.png" alt=""><input id="search" type="search" placeholder="Search locations" aria-label="Search map locations" autocomplete="off"><kbd>/</kbd></div>
+      <div class="zone-field"><label class="field-label" for="zone-select">Zone</label><select id="zone-select" disabled><option value="0">All zones</option></select></div>
+      <section id="trace-filter" aria-labelledby="trace-heading"><div class="section-heading"><h2 id="trace-heading">Empyrean Traces</h2></div><div id="trace-filter-options"></div></section>
+      <div class="section-heading"><h2>Map layers</h2><button id="all-layers">Show all</button></div>
+      <div id="layer-list" class="layer-list"></div>
+      <details class="advanced"><summary>More filters <img src="./assets/ui/arrow-down.png" alt=""></summary><label for="type-select">Resource / creature type</label><select id="type-select"><option value="">All types</option></select><label>Monster level</label><div class="level-fields"><input id="level-min" type="number" min="0" max="999" placeholder="Min" aria-label="Minimum monster level"><span>to</span><input id="level-max" type="number" min="0" max="999" placeholder="Max" aria-label="Maximum monster level"></div><label class="simple-check"><input id="saved-only" type="checkbox"> Only saved locations</label><label class="simple-check"><input id="zone-boundaries" type="checkbox"> Show zone boundaries</label><label class="simple-check"><input id="show-labels" type="checkbox" checked> Show place names</label></details>
+      <div class="section-heading results-heading"><h2>Locations <span id="result-count">0</span></h2><button id="clear-filters">Reset</button></div>
+      <div id="results" class="results" aria-label="Matching map locations"></div>
+      <button id="more-results" class="more-results" hidden>More locations</button>
+      <footer class="sidebar-footer"><div>Client data<span id="snapshot">October 2026 client</span></div><button id="data-open" aria-label="Read data coverage and limitations"><img src="./assets/ui/info.png" alt=""></button></footer>
+      </div>
+    </aside>
+    <section class="map-stage" aria-label="Interactive game map">
+      <canvas id="map" tabindex="0" role="application" aria-label="Interactive game map. Drag to pan, scroll or use plus and minus to zoom. Use arrow keys to pan and Home to fit the map."></canvas>
+      <div class="map-heading"><div class="map-crumb"><span id="map-faction">ELYOS</span><span>/</span><span>World map</span></div><h2 id="map-name">Verteron</h2><p id="map-summary">Loading locations...</p></div>
+      <div class="map-top-actions"><button id="share-view" title="Copy a link to this map view" aria-label="Share map"><img src="./assets/ui/share.png" alt=""><span>Share</span></button><button id="fullscreen" aria-label="Toggle fullscreen map" title="Fullscreen"><img src="./assets/ui/zoom-in.png" alt=""><span>Fullscreen</span></button></div>
+      <div class="compass" aria-hidden="true"><span>N</span><img src="./assets/ui/position.png" width="53" height="53" alt=""></div>
+      <div id="tooltip" class="tooltip" hidden></div>
+      <div id="map-message" class="map-message" role="status"><span class="spinner"></span> Loading maps...</div>
+      <div id="empty-state" class="empty-state" hidden><img src="./assets/ui/search.png" alt=""><h3>No locations found</h3><p>Try another search or broaden your filters.</p><button id="empty-reset">Clear filters</button></div>
+      <div class="map-tools" aria-label="Map controls"><button id="zoom-in" aria-label="Zoom in"><img src="./assets/ui/zoom-in.png" alt=""></button><button id="zoom-out" aria-label="Zoom out"><img src="./assets/ui/zoom-out.png" alt=""></button><span></span><button id="fit-map" aria-label="Fit map" title="Fit map (Home)"><img src="./assets/ui/map.png" alt=""></button></div>
+      <div class="map-bottom"><div class="map-scale"><div id="scale-bar"></div><span id="scale-label">500 m</span></div><span class="map-hint">Drag to explore <b>·</b> Scroll to zoom</span><span class="quality-badge"><i></i> <span id="quality-label">NATIVE MAP TILES</span></span></div>
+      <div class="map-footnote"><span>Client map locations</span><span id="coordinates">X 0 · Y 0</span></div>
+      <article id="detail-panel" class="detail-panel" hidden aria-label="Selected location">
+        <div class="detail-top"><span id="detail-category" class="eyebrow"></span><button id="close-detail" aria-label="Close location details"><img src="./assets/ui/close.png" alt=""></button></div><h2 id="detail-name"></h2><p id="detail-zone"></p><div id="detail-stats" class="detail-stats"></div><div id="detail-drops"></div>
+        <div class="detail-actions"><button id="save-location">Save location</button><button id="share-location"><img src="./assets/ui/share.png" alt="">Share</button></div>
+        <details class="source-details"><summary>Coordinates & data source</summary><p id="detail-coordinates"></p><p id="detail-source"></p><p id="detail-note"></p></details>
+      </article>
+    </section>
+  </main>
+  <dialog id="about-dialog"><button id="about-close" class="dialog-close" aria-label="Close about dialog"><img src="./assets/ui/close.png" alt=""></button><h2>Map information</h2><p>Browse the game's original maps, gathering nodes, monster placements, NPCs, settlements and travel entrances. Search by name, resource, creature type or zone.</p><h3>Coverage</h3><p id="coverage-text">Seven regions, streamed in original resolution. Location coordinates are joined to decoded client tables and zone polygons.</p><h3>Data limitations</h3><p>This is client data, not a live server tracker. Spawn groups can have alternative creatures or conditions. A marker shows an authored candidate position, not a guaranteed active spawn. Zone assignment uses 2D boundaries; check altitude for caves and overlapping floors. Missing records are not invented.</p><p>Saved locations stay in this browser. Shared links include your map view and filters, not your bookmarks. No account or analytics are required.</p><p class="legal">Independent, unofficial map. AION 2 names and game artwork belong to their respective owners. Data snapshot: October 2026.</p></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <noscript><p class="noscript">Enable JavaScript to explore the interactive map.</p></noscript>
+</body>
+</html>

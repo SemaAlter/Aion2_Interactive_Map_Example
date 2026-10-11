@@ -1,0 +1,6 @@
+.chrome-qa-profile*/
+.qa-*.png
+dist/
+.dist-build-*/
+.dist-previous/
+.qa-browser/

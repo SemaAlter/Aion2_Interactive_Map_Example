@@ -1,0 +1,259 @@
+{
+    "description":  "Original AION2 cooked UI sprites, cropped using PaperSprite atlas metadata.",
+    "sprites":  {
+                    "map":  {
+                                "rectangle":  [
+                                                  134,
+                                                  210,
+                                                  100,
+                                                  100
+                                              ],
+                                "atlas":  "Atlas_FWindow_WorldMap.png",
+                                "package":  "AION2/Content/UI/Resource/Sprite/FWindow_WorldMap/UT_FWindow_WorldMap_Btn_Map_Sprite.uasset"
+                            },
+                    "gathering":  {
+                                      "rectangle":  [
+                                                        238,
+                                                        106,
+                                                        100,
+                                                        100
+                                                    ],
+                                      "atlas":  "Atlas_FWindow_WorldMap.png",
+                                      "package":  "AION2/Content/UI/Resource/Sprite/FWindow_WorldMap/UT_FWindow_WorldMap_Gather_Sprite.uasset"
+                                  },
+                    "monster":  {
+                                    "rectangle":  [
+                                                      238,
+                                                      2,
+                                                      100,
+                                                      100
+                                                  ],
+                                    "atlas":  "Atlas_FWindow_WorldMap.png",
+                                    "package":  "AION2/Content/UI/Resource/Sprite/FWindow_WorldMap/UT_FWindow_WorldMap_Monster_Sprite.uasset"
+                                },
+                    "npc":  {
+                                "rectangle":  [
+                                                  134,
+                                                  2,
+                                                  100,
+                                                  100
+                                              ],
+                                "atlas":  "Atlas_FWindow_WorldMap.png",
+                                "package":  "AION2/Content/UI/Resource/Sprite/FWindow_WorldMap/UT_FWindow_WorldMap_NPC_Sprite.uasset"
+                            },
+                    "filters":  {
+                                    "rectangle":  [
+                                                      134,
+                                                      314,
+                                                      100,
+                                                      100
+                                                  ],
+                                    "atlas":  "Atlas_FWindow_WorldMap.png",
+                                    "package":  "AION2/Content/UI/Resource/Sprite/FWindow_WorldMap/UT_FWindow_WorldMap_Btn_Filter_Sprite.uasset"
+                                },
+                    "position":  {
+                                     "rectangle":  [
+                                                       342,
+                                                       106,
+                                                       100,
+                                                       100
+                                                   ],
+                                     "atlas":  "Atlas_FWindow_WorldMap.png",
+                                     "package":  "AION2/Content/UI/Resource/Sprite/FWindow_WorldMap/UT_FWindow_WorldMap_Btn_MyPos_Sprite.uasset"
+                                 },
+                    "save":  {
+                                 "rectangle":  [
+                                                   238,
+                                                   398,
+                                                   48,
+                                                   48
+                                               ],
+                                 "atlas":  "Atlas_FWindow_WorldMap.png",
+                                 "package":  "AION2/Content/UI/Resource/Sprite/FWindow_WorldMap/UT_FWindow_Worldmap_Icon_Save_Sprite.uasset"
+                             },
+                    "marker-bg":  {
+                                      "rectangle":  [
+                                                        2,
+                                                        266,
+                                                        128,
+                                                        128
+                                                    ],
+                                      "atlas":  "Atlas_FWindow_WorldMap.png",
+                                      "package":  "AION2/Content/UI/Resource/Sprite/FWindow_WorldMap/UT_FWindow_WorldMap_Icon_BG_Sprite.uasset"
+                                  },
+                    "button":  {
+                                   "rectangle":  [
+                                                     336,
+                                                     18,
+                                                     308,
+                                                     66
+                                                 ],
+                                   "atlas":  "Atlas_Common.Texture2D_1.png",
+                                   "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_Btn_02_Sprite.uasset"
+                               },
+                    "checkbox-on":  {
+                                        "rectangle":  [
+                                                          534,
+                                                          348,
+                                                          42,
+                                                          42
+                                                      ],
+                                        "atlas":  "Atlas_Common.png",
+                                        "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_Btn_ChkBox_On_Sprite.uasset"
+                                    },
+                    "checkbox-off":  {
+                                         "rectangle":  [
+                                                           580,
+                                                           348,
+                                                           42,
+                                                           42
+                                                       ],
+                                         "atlas":  "Atlas_Common.png",
+                                         "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_Btn_ChkBox_Off_Sprite.uasset"
+                                     },
+                    "arrow-down":  {
+                                       "rectangle":  [
+                                                         334,
+                                                         670,
+                                                         22,
+                                                         22
+                                                     ],
+                                       "atlas":  "Atlas_Common.Texture2D_1.png",
+                                       "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_ComboBox_ArrowDown_Sprite.uasset"
+                                   },
+                    "close":  {
+                                  "rectangle":  [
+                                                    372,
+                                                    194,
+                                                    54,
+                                                    54
+                                                ],
+                                  "atlas":  "Atlas_Common.png",
+                                  "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_Icon_Close_Popup_Sprite.uasset"
+                              },
+                    "home":  {
+                                 "rectangle":  [
+                                                   2,
+                                                   2,
+                                                   64,
+                                                   64
+                                               ],
+                                 "atlas":  "Atlas_Common.png",
+                                 "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_SystemButton_Icon_Home_Sprite.uasset"
+                             },
+                    "share":  {
+                                  "rectangle":  [
+                                                    444,
+                                                    252,
+                                                    44,
+                                                    44
+                                                ],
+                                  "atlas":  "Atlas_Common.png",
+                                  "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_ItemTooltip_Btn_Share_Sprite.uasset"
+                              },
+                    "search":  {
+                                   "rectangle":  [
+                                                     348,
+                                                     732,
+                                                     42,
+                                                     42
+                                                 ],
+                                   "atlas":  "Atlas_Common.png",
+                                   "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_List_Icon_DetailView_Sprite.uasset"
+                               },
+                    "zoom-in":  {
+                                    "rectangle":  [
+                                                      855,
+                                                      134,
+                                                      54,
+                                                      54
+                                                  ],
+                                    "atlas":  "Atlas_Common.png",
+                                    "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_Icon_View_Max_Sprite.uasset"
+                                },
+                    "zoom-out":  {
+                                     "rectangle":  [
+                                                       797,
+                                                       134,
+                                                       54,
+                                                       54
+                                                   ],
+                                     "atlas":  "Atlas_Common.png",
+                                     "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_Icon_View_Min_Sprite.uasset"
+                                 },
+                    "info":  {
+                                 "rectangle":  [
+                                                   474,
+                                                   913,
+                                                   30,
+                                                   30
+                                               ],
+                                 "atlas":  "Atlas_Common.png",
+                                 "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_Icon_Info_Sprite.uasset"
+                             },
+                    "elyos":  {
+                                  "rectangle":  [
+                                                    436,
+                                                    628,
+                                                    34,
+                                                    34
+                                                ],
+                                  "atlas":  "Atlas_Common.png",
+                                  "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_ItemTooltip_Light_Sprite.uasset"
+                              },
+                    "asmodians":  {
+                                      "rectangle":  [
+                                                        436,
+                                                        742,
+                                                        34,
+                                                        34
+                                                    ],
+                                      "atlas":  "Atlas_Common.png",
+                                      "package":  "AION2/Content/UI/Resource/Sprite/Common/UT_Common_ItemTooltip_Dark_Sprite.uasset"
+                                  },
+                    "panel-top":  {
+                                      "rectangle":  [
+                                                        2,
+                                                        2,
+                                                        614,
+                                                        38
+                                                    ],
+                                      "atlas":  "Atlas_Common_Deco.png",
+                                      "package":  "AION2/Content/UI/Resource/Sprite/Common_Deco/UT_Common_Deco_Popup_Top_L_Sprite.uasset"
+                                  },
+                    "panel-bottom":  {
+                                         "rectangle":  [
+                                                           620,
+                                                           2,
+                                                           401,
+                                                           7
+                                                       ],
+                                         "atlas":  "Atlas_Common_Deco.png",
+                                         "package":  "AION2/Content/UI/Resource/Sprite/Common_Deco/UT_Common_Deco_Popup_Bottom_L_Sprite.uasset"
+                                     },
+                    "divider":  {
+                                    "rectangle":  [
+                                                      620,
+                                                      13,
+                                                      377,
+                                                      2
+                                                  ],
+                                    "atlas":  "Atlas_Common_Deco.png",
+                                    "package":  "AION2/Content/UI/Resource/Sprite/Common_Deco/UT_Common_Deco_Popup_TitleDeco_Line_Sprite.uasset"
+                                },
+                    "title":  {
+                                  "rectangle":  [
+                                                    320,
+                                                    586,
+                                                    37,
+                                                    80
+                                                ],
+                                  "atlas":  "Atlas_Common_Deco.png",
+                                  "package":  "AION2/Content/UI/Resource/Sprite/Common_Deco/UT_Common_Deco_TitleBullet_Sprite.uasset"
+                              }
+                },
+    "fonts":  [
+                  "AION2/Content/UI/Font/Aion2Yoon_EN_B.ufont",
+                  "AION2/Content/UI/Font/Aion2Atreia_EN_Bold.ufont"
+              ]
+}
