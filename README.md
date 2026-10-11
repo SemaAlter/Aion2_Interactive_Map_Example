@@ -19,6 +19,8 @@ bash Build-Deploy-Website.sh          # Linux, Node.js 22+
 Then open http://127.0.0.1:4179/. Details, filters, deployment and the rebuild steps are in
 [`tools/aion2-map-viewer/README.md`](tools/aion2-map-viewer/README.md).
 
+![AION2 map preview](./preview.jpg)
+
 Related: [Aion2_Client_Decoding](https://github.com/SemaAlter/Aion2_Client_Decoding) (client data
 extraction) and [Aion2_Server_Example](https://github.com/SemaAlter/Aion2_Server_Example) (local
 server).
